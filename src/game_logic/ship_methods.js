@@ -1,11 +1,5 @@
 function checkForShip(player, coordinates) {
-  const ships = [
-    {
-      locations: [],
-    },
-  ];
-
-  return ships.find((ship) =>
+  return player.ships.some((ship) =>
     ship.locations.some(
       (location) =>
         location[0] === coordinates[0] && location[1] === coordinates[1]
