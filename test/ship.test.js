@@ -74,3 +74,21 @@ describe("checkForShip", () => {
     expect(checkForShip(player, [9, 9])).toBe(false);
   });
 });
+
+describe("damageShip", () => {
+  test("should register damage on a ship in a given coordinate", () => {
+    const { damageShip } = require("../src/game_logic/ship_methods");
+    const ship = {
+      locations: [[0, 0]],
+      damage: [],
+    };
+
+    const damagePoint = [0, 0];
+    const solidPoint = [0, 0];
+
+    damageShip(ship, damagePoint);
+
+    expect(ship.damage).toEqual(expect.arrayContaining([damagePoint]));
+    expect(ship.damage).not.toEqual(expect.arrayContaining([solidPoint]));
+  });
+});
