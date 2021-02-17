@@ -1,21 +1,21 @@
-function checkForShip(player, coordinates) {
+function checkForShipIndex(player, points) {
   return player.ships.findIndex((ship) =>
     ship.locations.some(
-      (location) =>
-        location[0] === coordinates[0] && location[1] === coordinates[1]
+      (shipPoints) =>
+        shipPoints[0] === points[0] && shipPoints[1] === points[1]
     )
   );
 }
 
-function damageShip(ship, coordinates) {
-  ship.damage.push(coordinates);
+function damageShip(ship, points) {
+  ship.damage.push(points);
 }
 
-function fire(player, coordinates) {
-  const opponentShipIndex = checkForShip(player, coordinates)
-  if (opponentShipIndex !== -1) damageShip(player.ships[opponentShipIndex], coordinates)
+function fire(player, points) {
+  const opponentShipIndex = checkForShipIndex(player, points)
+  if (opponentShipIndex !== -1) damageShip(player.ships[opponentShipIndex], points)
 }
 
-module.exports.checkForShip = checkForShip;
+module.exports.checkForShipIndex = checkForShipIndex;
 module.exports.damageShip = damageShip;
 module.exports.fire = fire;

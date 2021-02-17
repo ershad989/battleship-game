@@ -1,7 +1,6 @@
-const { expect } = require("@jest/globals");
 
-describe("checkForShip", () => {
-  const { checkForShip } = require("../src/game_logic/ship_methods");
+describe("checkForShipIndex", () => {
+  const { checkForShipIndex } = require("../src/game_logic/ship_methods");
   let player;
 
   beforeAll(() => {
@@ -31,36 +30,36 @@ describe("checkForShip", () => {
     };
   });
 
-  test("should correctly report no ship at a given player coordinate", () => {
-    expect(checkForShip(player, [9, 9])).toBe(-1);
+  test("should correctly report no ship at a given player point", () => {
+    expect(checkForShipIndex(player, [9, 9])).toBe(-1);
   });
 
-  test("should correctly report a ship at a given player coordinate", () => {
-    expect(checkForShip(player, [0, 0])).not.toBe(-1);
+  test("should correctly report a ship at a given player point", () => {
+    expect(checkForShipIndex(player, [0, 0])).not.toBe(-1);
   });
 
-  test("should handle ships at more than one player coordinate", () => {
-    expect(checkForShip(player, [0, 0])).not.toBe(-1);
-    expect(checkForShip(player, [0, 1])).not.toBe(-1);
+  test("should handle ships at more than one player point", () => {
+    expect(checkForShipIndex(player, [0, 0])).not.toBe(-1);
+    expect(checkForShipIndex(player, [0, 1])).not.toBe(-1);
 
-    expect(checkForShip(player, [9, 9])).toBe(-1);
+    expect(checkForShipIndex(player, [9, 9])).toBe(-1);
   });
 
   test("should handle multiple ships", () => {
-    expect(checkForShip(player, [0, 0])).not.toBe(-1);
-    expect(checkForShip(player, [0, 1])).not.toBe(-1);
+    expect(checkForShipIndex(player, [0, 0])).not.toBe(-1);
+    expect(checkForShipIndex(player, [0, 1])).not.toBe(-1);
 
-    expect(checkForShip(player, [1, 0])).not.toBe(-1);
-    expect(checkForShip(player, [1, 1])).not.toBe(-1);
+    expect(checkForShipIndex(player, [1, 0])).not.toBe(-1);
+    expect(checkForShipIndex(player, [1, 1])).not.toBe(-1);
 
-    expect(checkForShip(player, [9, 9])).toBe(-1);
+    expect(checkForShipIndex(player, [9, 9])).toBe(-1);
   });
 });
 
 describe("damageShip", () => {
   const { damageShip } = require("../src/game_logic/ship_methods");
 
-  test("should register damage on a ship in a given coordinate", () => {
+  test("should register damage on a ship in a given point", () => {
     const ship = {
       locations: [[0, 0]],
       damage: [],
@@ -93,12 +92,12 @@ describe("fire", () => {
     };
   });
 
-  test("should register an attack from a player to another player's ship at a given coordinate.", () => {
+  test("should register an attack from a player to another player's ship at a given point.", () => {
     fire(player, correctAttackPoint);
     expect(player.ships[0].damage).toEqual(expect.arrayContaining([correctAttackPoint]));
   });
 
-  test("should NOT register an attack from a player to another player's ship at a Wrong given coordinate.", () => {
+  test("should NOT register an attack from a player to another player's ship at a Wrong given point.", () => {
     fire(player, falseAttackPoint);
     expect(player.ships[0].damage).not.toEqual(expect.arrayContaining([falseAttackPoint]));
   });
